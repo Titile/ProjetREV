@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Salle a manger</title>
+    <meta name="description" content="Salle a manger - Projet REV 2016">
+    <script src="aframe.js"></script>
+    <script src="js/aframe-text-component.min.js"></script>
+
+
+</head>
+
+<body>
+    <a-scene stats="false" vr-mode-ui="enabled: false">
+
+        <a-entity id="camera" camera="userHeight: 2.0" look-controls wasd-controls>
+            <a-entity cursor="fuse: true; fuseTimeout: 500"
+                      position="0 0 -0.2"
+                      geometry="primitive: sphere ; radius: 0.01 "
+                      material="color: green; transparent: true; opacity:0.3;  shader: flat">
+            </a-entity>
+        </a-entity>
+
+        <a-sky src="images/pano/tintamarre.jpg"></a-sky>
+
+        <a-assets>
+            <a-asset-item id="table-obj" src="modeles/chair_table/table.obj"></a-asset-item>
+            <a-asset-item id="table-mtl" src="modeles/chair_table/table.mtl"></a-asset-item>
+
+            <a-asset-item id="chair-obj" src="modeles/chair_table/chair.obj"></a-asset-item>
+            <a-asset-item id="chair-mtl" src="modeles/chair_table/chair.mtl"></a-asset-item>
+
+        </a-assets>
+
+
+        <!-- un bouton pour l'interaction -->
+
+        <a-entity id="bouton-G">
+        </a-entity>
+
+        <!-- Le sol de la pièce  -->
+        <a-entity geometry="primitive: plane; width: 8.5; height: 12"
+                  rotation="90 0 0"
+                  material="side: double; src: url(textures/wood.jpg); repeat: 10 50">
+        </a-entity>
+
+        <!-- Le premier mur -->
+        <a-entity geometry="primitive: plane; width: 25; height: 12"
+                  position="0 4.5 -6"
+                  material="side: double; src: url(textures/pierre.jpg); repeat: 4 3">
+        </a-entity>
+
+        <!-- Le deuxième mur -->
+        <a-entity geometry="primitive: plane; width: 20; height: 12"
+                  position="12.5 6 0"
+                  rotation="0 90 0"
+                  material="side: double; src: url(textures/pierre.jpg); repeat: 4 3">
+        </a-entity>
+
+        <!-- Le troisième mur -->
+        <a-entity geometry="primitive: plane; width: 20; height: 12"
+                  position="-12.5 6 0"
+                  rotation="0 -90 0"
+                  material="side: double; src: url(textures/pierre.jpg); repeat: 4 3">
+        </a-entity>
+
+        <!-- Le quatrième mur -->
+        <a-entity geometry="primitive: plane; width: 25; height: 12"
+                  position="0 4.5 6"
+                  rotation="0 0 0"
+                  material="side: double;src: url(textures/pierre.jpg); repeat: 4 3">
+        </a-entity>
+
+
+        <!-- Le plafond -->
+        <a-entity geometry="primitive: plane; width: 25; height: 20"
+                  rotation="90 0 0"
+                  position="0 12 0"
+                  material="side: double; src: url(textures/acajou.png) repeat: 100 20">
+        </a-entity>
+
+        <!-- Une table -->
+        <a-obj-model id="table" scr="#table_obj" mtl="#table_mtl" position="0 0 0" rotation="0 90 0">
+        </a-obj-model>
+
+        <!-- L'ouverture -->
+        <a-entity geometry="primitive: plane; width: 2; height: 4"
+                  position="0 2 -9.999"
+                  material="side: double; color:grey"></a-entity>
+
+        <!-- Repère de la scène repeat: 100 20 -->
+        <a-sphere radius="0.2"></a-sphere>
+        <a-cylinder height="3.0" color="green" radius="0.05" position="0.0 1.5 0.0"></a-cylinder>
+        <a-cylinder height="3.0" color="red" radius="0.05" position="1.5 0.0 0.0" rotation="0 0 -90"></a-cylinder>
+        <a-cylinder height="3.0" color="blue" radius="0.05" position="0.0 0.0 1.5" rotation="90 0 0"></a-cylinder>
+
+        <a-sphere radius="0.2" color="red" position="4 0 0"></a-sphere>
+        <a-sphere radius="0.2" color="green" position="0 4 0"></a-sphere>
+        <a-sphere radius="0.2" color="blue" position="0 0 4"></a-sphere>
+
+        <!-- table -->
+
+        <a-obj-model id="table" src="#table-obj" mtl="#table-mtl"
+                     rotation="0 90 0" position="0.0 0.0 0.0">
+        </a-obj-model>
+
+        <!-- chaises  -->
+        <a-obj-model id="chaise-1" src="#chair-obj" mtl="#chair-mtl"
+                     material = "color:white"
+                     rotation="0 0 0" position="0.0 0.0 -1.0">
+        </a-obj-model>
+
+        <a-obj-model id="chaise-2" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 180 0" position="0.0 0.0 1.0">
+        </a-obj-model>
+
+        <a-obj-model id="chaise-3" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 90 0" position="-0.5 0 0.0 0.0">
+        </a-obj-model>
+
+        <a-obj-model id="chaise-4" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 -90 0" position="0.5 0.0 0.0">
+        </a-obj-model>
+
+        <!--  -->
+    </a-scene>
+
+    <script src="scripts/mobile.js"></script>
+    <script src="scripts/crv.js"></script>
+
+
+</body>
+
+</html>
