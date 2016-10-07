@@ -1,0 +1,21 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl Box1Default
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.137255 0.039216 0.039216
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl gray_micro_fiber_cloth_fabric_texture_jpg_material
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.552157 0.552157 0.552157
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd gray-micro-fiber-cloth-fabric-texture.jpg
