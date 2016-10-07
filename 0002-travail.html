@@ -18,7 +18,7 @@
 				    position="0 0 -0.2"
 				    geometry="primitive: sphere ; radius: 0.01 "
 				    material="color: green; transparent: true; opacity:0.3;  shader: flat">
-				</a-entity>		
+				</a-entity>
 			</a-entity>
 
 			<a-sky src="images/pano/tintamarre.jpg"></a-sky>
@@ -28,14 +28,14 @@
 				<a-asset-item id="table-mtl" src="modeles/chair_table/table.mtl"></a-asset-item>
 
 				<a-asset-item id="chair-obj" src="modeles/chair_table/chair.obj"></a-asset-item>
-				<a-asset-item id="chair-mtl" src="modeles/chair_table/chair.mtl"></a-asset-item>	
+				<a-asset-item id="chair-mtl" src="modeles/chair_table/chair.mtl"></a-asset-item>
 
 			</a-assets>
 				<!-- <a-mixin id="box" cursor-listener geometry="primitive: box" material="color: blue"> -->
 			    <!-- <a-mixin id="tall" geometry="height: 30"></a-mixin>
     			<a-mixin id="wide" geometry="width: 8.14"></a-mixin> -->
 			</a-entity>
-			
+
 			<!-- piece -->
 			<a-entity geometry="primtive:box; depth:50; height:10; width:8"
 				material="color:pink">
@@ -45,16 +45,16 @@
 				light="type:point; intensity:5; distance:50; decay:2"
 				position="0.0 30.0 15.0">
 			</a-entity>
-			
+
 			<!-- Lumière plafond 2 -->
 			<a-entity
 				light="type:point; intensity:5; distance:50; decay:2"
 				position="0.0 30.0 -15.0">
 			</a-entity>
 
-			<a-entity 
+			<a-entity
 				id="poster01"
-				geometry = "primitive: plane ; height: 1.8 ; width: 3.0" 
+				geometry = "primitive: plane ; height: 1.8 ; width: 3.0"
 				material = "side: double; src: url(textures/Hokusai.jpg)"
 				rotation="0 90 0"
 				position = "4.0 4.0 4.1">
@@ -82,26 +82,25 @@
 
 			<!-- table -->
 
-			<a-obj-model id="table" src="#table-obj" mtl="#table-mtl" 
+			<a-obj-model id="table" src="#table-obj" mtl="#table-mtl"
 		             rotation="0 90 0" position="0.0 0.0 0.0">
             </a-obj-model>
 
-
             <!-- chaises  -->
-            <a-obj-model id="chaise-1" src="#chair-obj" mtl="#chair-mtl" 
-				material="color:white"        			
+            <a-obj-model id="chaise-1" src="#chair-obj" mtl="#chair-mtl"
+				material="color:white"
 	            rotation="0 0 0" position="0.0 0.0 -1.0">
             </a-obj-model>
 
-			<a-obj-model id="chaise-2" src="#chair-obj" mtl="#chair-mtl" 
+			<a-obj-model id="chaise-2" src="#chair-obj" mtl="#chair-mtl"
 	             rotation="0 180 0" position="0.0 0.0 1.0"  >
             </a-obj-model>
 
-			<a-obj-model id="chaise-3" src="#chair-obj" mtl="#chair-mtl" 
+			<a-obj-model id="chaise-3" src="#chair-obj" mtl="#chair-mtl"
 	             rotation="0 90 0" position="-0.5 0 0.0 0.0"  >
             </a-obj-model>
 
-			<a-obj-model id="chaise-4" src="#chair-obj" mtl="#chair-mtl" 
+			<a-obj-model id="chaise-4" src="#chair-obj" mtl="#chair-mtl"
 	             rotation="0 -90 0" position="0.5 0.0 0.0"  >
             </a-obj-model>
 
