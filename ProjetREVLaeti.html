@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Salle a manger</title>
+    <title>Salle à manger</title>
     <meta name="description" content="Salle a manger - Projet REV 2016">
     <script src="aframe.js"></script>
     <script src="js/aframe-text-component.min.js"></script>
@@ -25,22 +25,11 @@
 
         <!-- Les modèles à récupérer-->
         <a-assets>
-            <a-asset-item id="table-obj" src="modeles/chair_table/table.obj"></a-asset-item>
-            <a-asset-item id="table-mtl" src="modeles/chair_table/table.mtl"></a-asset-item>
-            <a-asset-item id="chair-obj" src="modeles/chair_table/chair.obj"></a-asset-item>
-            <a-asset-item id="chair-mtl" src="modeles/chair_table/chair.mtl"></a-asset-item>
-
-            <a-asset-item id="cheminee-obj" src="modeles/cheminee/cheminee.obj"></a-asset-item>
-            <a-asset-item id="cheminee-mtl" src="modeles/cheminee/cheminee.mtl"></a-asset-item>
-
-            <a-asset_item id="rideau-obj" src="modeles/rideau/rideau.obj"></a-asset_item>
-            <a-asset_item id="tringle_rideau-obj" src="modeles/rideau/tringleRideai.obj"></a-asset_item>
-
 
         </a-assets>
 
 
-    <!-- un bouton pour l'interaction -->
+        <!-- un bouton pour l'interaction -->
         <a-entity id="bouton-G">
         </a-entity>
 
@@ -154,21 +143,20 @@
 
         <!-- La porte -->
         <a-entity geometry="primitive: plane; width: 3; height: 4"
-                  position="6 2 -5.95"sq
+                  position="6 2 -5.95" sq
                   material="side: double; src: url(textures/door.jpg)"></a-entity>
-        
+
         <!-- La cadre de la porte-->
         <a-box width="4" height="2"
-               position = "4.5 2 -6" scale ="1 0.1 0.2"
-               rotation ="0 90 90"
+               position="4.5 2 -6" scale="1 0.1 0.2"
+               rotation="0 90 90"
                material="src: url(textures/boiserie.jpg)">
         </a-box>
 
-        <a-box width="3" height ="2"
+        <a-box width="3" height="2"
                position="6 3.9 -6" scale="1 0.1 0.2"
-               rotation ="90 90 90"
-               material="src: url(textures/boiserie.jpg)"
-                ></a-box>
+               rotation="90 90 90"
+               material="src: url(textures/boiserie.jpg)"></a-box>
 
         <a-box width="4" height="2"
                position="7.5 2 -6" scale="1 0.1 0.2"
@@ -178,69 +166,69 @@
 
 
         <!-- La fenetre du fond-->
-            <!-- Le cadre-->
-            <a-entity geometry="primitive: plane; width: 4; height: 7"
-                        position="9 3.5 -4"
-                        rotation="0 90 0"
-                        material="side: double; src: url(textures/wall.jpg)">
-            </a-entity>
+        <!-- Le cadre-->
+        <a-entity geometry="primitive: plane; width: 4; height: 7"
+                  position="9 3.5 -4"
+                  rotation="0 90 0"
+                  material="side: double; src: url(textures/wall.jpg)">
+        </a-entity>
 
-            <a-entity geometry="primitive: plane; width: 4; height: 7"
-                      position="9 3.5 4"
-                      rotation="0 90 0"
-                      material="side: double; src: url(textures/wall.jpg)">
-            </a-entity>
+        <a-entity geometry="primitive: plane; width: 4; height: 7"
+                  position="9 3.5 4"
+                  rotation="0 90 0"
+                  material="side: double; src: url(textures/wall.jpg)">
+        </a-entity>
 
-            <a-entity geometry="primitive: plane; width: 2; height: 4"
-                      position="9 6 0"
-                      rotation="0 90 90"
-                      material="side: double; src: url(textures/wall.jpg)">
-            </a-entity>
+        <a-entity geometry="primitive: plane; width: 2; height: 4"
+                  position="9 6 0"
+                  rotation="0 90 90"
+                  material="side: double; src: url(textures/wall.jpg)">
+        </a-entity>
 
-            <!-- Les boiseries-->
-            <a-box width="5" height="0.3" depth="0.2"
-                   position="9 2.5 -2" 
-                   rotation="0 90 90"
-                   material="src: url(textures/boiserie.jpg)">
-            </a-box>
+        <!-- Les boiseries-->
+        <a-box width="5" height="0.3" depth="0.2"
+               position="9 2.5 -2"
+               rotation="0 90 90"
+               material="src: url(textures/boiserie.jpg)">
+        </a-box>
 
-            <a-box width="4.5" height="0.3" depth="0.2"
-                   position="9 4.9 0"
-                   rotation="90 0 90"
-                   material="src: url(textures/boiserie.jpg)">
-            </a-box>
-            
-            <a-box width="5" height="0.3" depth="0.1"
-                   position="9 2.5 2"
-                   rotation="0 90 90"
-                   material="src: url(textures/boiserie.jpg)">
-            </a-box>
+        <a-box width="4.5" height="0.3" depth="0.2"
+               position="9 4.9 0"
+               rotation="90 0 90"
+               material="src: url(textures/boiserie.jpg)">
+        </a-box>
 
-            <!-- Contours mur de la fenetre-->
-            <a-entity geometry="primitive: plane; width: 1; height: 5"
-                      position="9.5 2.5 2"
-                      material="side: double; src: url(textures/boiserie.jpg)">
-            </a-entity>
-            
-            <a-entity geometry="primitive: plane; width: 1; height: 5"
-                      position="9.5 2.5 -2"
-                      material="side: double; src: url(textures/boiserie.jpg)">
-            </a-entity>
+        <a-box width="5" height="0.3" depth="0.1"
+               position="9 2.5 2"
+               rotation="0 90 90"
+               material="src: url(textures/boiserie.jpg)">
+        </a-box>
 
-            <a-entity geometry="primitive: plane; width: 4; height: 1"
-                      position="9.5 5 0"
-                      rotation="90 90 0"
-                      material="side: double; src: url(textures/boiserie.jpg)">
-            </a-entity>
+        <!-- Contours mur de la fenetre-->
+        <a-entity geometry="primitive: plane; width: 1; height: 5"
+                  position="9.5 2.5 2"
+                  material="side: double; src: url(textures/boiserie.jpg)">
+        </a-entity>
 
-            <!-- La fenetre en elle-même-->
-            <a-entity geometry="primitive: plane; width: 4; height: 5"
-                      position="9.9 2.5 0"
-                      rotation="0 90 0"
-                      material="side: double; src: url(textures/window.jpg)">
-            </a-entity>
-      
-         <!-- Repère de la scène repeat: 100 20 -->
+        <a-entity geometry="primitive: plane; width: 1; height: 5"
+                  position="9.5 2.5 -2"
+                  material="side: double; src: url(textures/boiserie.jpg)">
+        </a-entity>
+
+        <a-entity geometry="primitive: plane; width: 4; height: 1"
+                  position="9.5 5 0"
+                  rotation="90 90 0"
+                  material="side: double; src: url(textures/boiserie.jpg)">
+        </a-entity>
+
+        <!-- La fenetre en elle-même-->
+        <a-entity geometry="primitive: plane; width: 4; height: 5"
+                  position="9.9 2.5 0"
+                  rotation="0 90 0"
+                  material="side: double; src: url(textures/window.jpg)">
+        </a-entity>
+
+        <!-- Repère de la scène repeat: 100 20 -->
         <a-sphere radius="0.2"></a-sphere>
         <a-cylinder height="3.0" color="green" radius="0.05" position="0.0 1.5 0.0"></a-cylinder>
         <a-cylinder height="3.0" color="red" radius="0.05" position="1.5 0.0 0.0" rotation="0 0 -90"></a-cylinder>
@@ -249,6 +237,8 @@
         <a-sphere radius="0.2" color="red" position="4 0 0"></a-sphere>
         <a-sphere radius="0.2" color="green" position="0 4 0"></a-sphere>
         <a-sphere radius="0.2" color="blue" position="0 0 4"></a-sphere>
+
+ 
     </a-scene>
 
     <!--<script src="scripts/mobile.js"></script>
