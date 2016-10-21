@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", init, false);
-
 var scene = document.querySelector('a-scene');
 var acteurs = {};
+var positionReached
+var positionBoule
 
 function init() {
-    alert("CRV");
     //var scene = document.querySelector('a-scene');
     alert("Scene " + scene);
     //tableau("t-01", "textures/Hokusai.jpg", "1 1 1", "0 2 0", "0 0 0");
     //tableau("t-02", "textures/japan.jpg", "1,1,1", "5 1 0", "0 0 0");
+
 
     //m1 = Mobile("m-01", "t-01");
     //acteurs["m-01"] = m1
@@ -28,6 +29,48 @@ function init() {
 	document.getElementById("cube").addEventListener('mouseleave',onLeave);
 	document.getElementById("cube").addEventListener('click',onClick);
 	*/
+
+    // Gestion du click sur une sph�re
+    document.getElementById("sphere1").addEventListener('click', onClick)
+    document.getElementById("sphere2").addEventListener('click', onClick)
+    document.getElementById("sphere3").addEventListener('click', onClick)
+
+}
+
+function onClick(e)
+{
+    positionReached = setInterval(moveThatShit, 50);
+    positionBoule = this.getAttribute("position")
+    this.setAttribute('material', 'color', 'red');
+}
+
+function moveThatShit()
+{
+
+    // R�cup�ration de la position de la cam�ra
+    var positionCamera = document.getElementById("camera").getAttribute("position")
+
+    if (positionCamera > positionBoule.x + 0.5)
+
+    if (positionCamera < positionBoule. - 0.5)
+
+    if (positionCamera.x > positionBoule.x) {
+        positionCamera.x-=0.1;
+    }
+    else {
+        positionCamera.x += 0.1;
+    }
+    // Gestion de la position en Z
+    if (positionCamera.z > positionBoule.z) {
+        positionCamera.z -= 0.1;
+    }
+    else {
+        positionCamera.z += 0.1;
+    }
+    document.getElementById("camera").setAttribute("position", positionCamera)
+
+    // Test pour savoir si la cam�ra a atteint la position
+    if (positionCamera.x == positionBoule.x && positionCamera.z == positionBoule.z) clearInterval(positionReached)
 }
 
 
