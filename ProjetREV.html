@@ -6,6 +6,7 @@
     <meta name="description" content="Salle a manger - Projet REV 2016">
     <script src="aframe.js"></script>
     <script src="js/aframe-text-component.min.js"></script>
+
 </head>
 
 <body>
@@ -13,7 +14,7 @@
 
         <!-- La caméra -->
         <a-entity id="camera" camera="userHeight: 2.0" look-controls wasd-controls>
-            <a-entity cursor="fuse: true; fuseTimeout: 500"
+            <a-entity cursor="fuse: false; fuseTimeout: 500"
                       position="0 0 -0.2"
                       geometry="primitive: sphere ; radius: 0.01 "
                       material="color: pink; transparent: true; opacity:0.3;  shader: flat">
@@ -301,8 +302,11 @@
 
     </a-scene>
 
+    <script src="scripts/guide_Ando.js"></script>
+
     <!--<script src="scripts/mobile.js"></script>
     <script src="scripts/crv.js"></script>-->
+    <script src="scripts/States.js"></script>
 
 
 </body>
