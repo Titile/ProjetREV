@@ -7,18 +7,22 @@ function init() {
     alert("CRV");
     //var scene = document.querySelector('a-scene');
     alert("Scene " + scene);
-    tableau("t-01", "textures/Hokusai.jpg", "1 1 1", "0 2 0", "0 0 0");
-    tableau("t-02", "textures/japan.jpg", "1,1,1", "5 1 0", "0 0 0");
+    //tableau("t-01", "textures/Hokusai.jpg", "1 1 1", "0 2 0", "0 0 0");
+    //tableau("t-02", "textures/japan.jpg", "1,1,1", "5 1 0", "0 0 0");
 
-    m1 = Mobile("m-01", "t-01");
-    acteurs["m-01"] = m1
+    //m1 = Mobile("m-01", "t-01");
+    //acteurs["m-01"] = m1
 
-    m2 = Mobile("m-02", "t-02");
-    acteurs["m-02"] = m2
+    //m2 = Mobile("m-02", "t-02");
+    //acteurs["m-02"] = m2
 
 
 
-    setInterval(anim, 50);
+
+    document.getElementById("sphere1").addEventListener('click', onClick);
+    document.getElementById("sphere2").addEventListener('click', onClick);
+    document.getElementById("sphere3").addEventListener('click', onClick);
+    //setInterval(anim, 50);
     /*
 	document.getElementById("cube").addEventListener('mouseenter',onEnter);
 	document.getElementById("cube").addEventListener('mouseleave',onLeave);
@@ -36,7 +40,30 @@ function anim(dt) {
 
 }
 
+function animCamera(positionSphere) {
+    var camera = document.getElementById("camera");
+    var positionCamera = camera.getAttribute("position");
+    //p.x += 0.1
+    //t.setAttribute("position", p);
 
+    if (positionCamera.x > positionSphere.x) {
+        positionCamera.x --;
+    }
+    else
+    {
+        positionCamera.x++;
+    }
+
+    if (positionCamera.z > positionSphere.z) {
+        positionCamera.z--;
+    }
+    else {
+        positionCamera.z++;
+    }
+    camera.setAttribute("position", positionCamera);
+
+
+}
 
 function tableau(nom, src, scale, position, rotate) {
     var scene = document.querySelector('a-scene');
@@ -70,13 +97,26 @@ function tableau(nom, src, scale, position, rotate) {
     scene.appendChild(tableau);
 }
 
-
 function Mobile(nom, cible) {
     this.id = nom;
     this.cible = cible;
 }
 
+function onClick(e) {
+    //var primitive = e.target.parentElement.parentElement;
+    //var position = primitive.getAttribute("position");
+    //position.x--;
+    //primitive.setAttribute("position", position);
+    //var camera = document.getElementById("camera");
+    //var positionCamera = camera.getAttribute("position");
+    //var positionSphere = this.getAttribute("position");
 
+    this.setAttribute('material', 'color', 'red');
+
+    setInterval(animCamera, 50);
+
+    alert("I was clicked");
+}
 
 /*
 function onEnter(e){
