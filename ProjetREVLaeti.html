@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Salle à manger</title>
+    <title>Salle a manger</title>
     <meta name="description" content="Salle a manger - Projet REV 2016">
     <script src="aframe.js"></script>
     <script src="js/aframe-text-component.min.js"></script>
@@ -13,7 +13,7 @@
 
         <!-- La caméra -->
         <a-entity id="camera" camera="userHeight: 2.0" look-controls wasd-controls>
-            <a-entity cursor="fuse: true; fuseTimeout: 500"
+            <a-entity cursor="fuse: false; fuseTimeout: 500"
                       position="0 0 -0.2"
                       geometry="primitive: sphere ; radius: 0.01 "
                       material="color: pink; transparent: true; opacity:0.3;  shader: flat">
@@ -25,6 +25,20 @@
 
         <!-- Les modèles à récupérer-->
         <a-assets>
+            <<a-asset-item id="table-obj" src="modeles/chair_table/table.obj"></a-asset-item>
+            <a-asset-item id="table-mtl" src="modeles/chair_table/table.mtl"></a-asset-item>
+            <a-asset-item id="chair-obj" src="modeles/vieille_chaise/chair_granmother.obj"></a-asset-item>
+            <a-asset-item id="chair-mtl" src="modeles/vieille_chaise/chair_granmother.mtl"></a-asset-item>
+            <a-asset-item id="cheminee-obj" src="modeles/cheminee/fireplace1.obj"></a-asset-item>
+            <a-asset-item id="cheminee-mtl" src="modeles/cheminee/fireplace1.mtl"></a-asset-item>
+
+
+            <!--mixin-->
+            <a-mixin id="wood" material="side: double; src: url(textures/wood.jpg)"></a-mixin>
+            <a-mixin id="planche" geometry="primitive:box; height:0.2; width:6; depth:4"></a-mixin>
+            <a-mixin id="pied_table" geometry="primitive:box; height:1.1; width:0.4; depth:0.5"></a-mixin>
+            <a-mixin id="cadre-porte" geometry="primitive:box; height:0.2; width:4; depth:0.2"
+                     rotation="0 90 90" material="src: url(textures/boiserie.jpg)"></a-mixin>
 
         </a-assets>
 
@@ -238,11 +252,65 @@
         <a-sphere radius="0.2" color="green" position="0 4 0"></a-sphere>
         <a-sphere radius="0.2" color="blue" position="0 0 4"></a-sphere>
 
- 
+        <!-- table -->
+        <a-entity id="table">
+            <a-entity mixin="wood planche"
+                      position="0 1.1 0">
+            </a-entity>
+
+            <!--pied de la table-->
+
+            <a-entity mixin="wood pied_table"
+                      position="-2.5 0.5 1.5"></a-entity>
+            <a-entity mixin="wood pied_table"
+                      position="2.5 0.5 1.5"></a-entity>
+            <a-entity mixin="wood pied_table"
+                      position="-2.5 0.5 -1.5"></a-entity>
+            <a-entity mixin="wood pied_table"
+                      position="2.5 0.5 -1.5"></a-entity>
+
+        </a-entity>
+
+        <!--tapis-->
+        <a-entity geometry="primitive: plane; width: 10; height: 8"
+                  position="0 0.1 0"
+                  rotation="90 0 0"
+                  material="side: double; src: url(images/tapis.jpg) ">
+        </a-entity>
+
+        <!-- chaises  -->
+        <a-obj-model id="chaise-1" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 0 0" position="-2.3 0.0 -5.20"
+                     scale="0.02 0.02 0.02">
+        </a-obj-model>
+
+        <a-obj-model id="chaise-2" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 0 0" position="-4.0 0.0 -5.20"
+                     scale="0.02 0.02 0.02">
+        </a-obj-model>
+
+
+
+        <a-obj-model id="chaise-3" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 90 0" position="-0.5 0 0.0 0.0">
+        </a-obj-model>
+
+        <a-obj-model id="chaise-4" src="#chair-obj" mtl="#chair-mtl"
+                     rotation="0 -90 0" position="0.5 0.0 0.0">
+        </a-obj-model>
+
+
+
+        <!-- DEUXIEME PARTIE PROJET REV-->
+        <!-- Des sphères blanches translucides --> 
+        <a-sphere id="sphere1" color="white" radius="1" opacity="0.5" position="-7 2 0"></a-sphere>
+        <a-sphere id="sphere2" color="white" radius="1" opacity="0.5" position="3 2 4"></a-sphere> 
+        <a-sphere id="sphere3" color="white" radius="1" opacity="0.5" position="0 2 -4"></a-sphere>
+
     </a-scene>
 
-    <!--<script src="scripts/mobile.js"></script>
-    <script src="scripts/crv.js"></script>-->
+    <!--<script src="scripts/mobile.js"></script>-->
+    <script src="scripts/crv.js"></script>
 
 
 </body>
