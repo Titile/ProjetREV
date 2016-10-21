@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", init, false);
 
+
 function init()
 {
-    alert("Le guide va apparaitre!!!");
-
     guide = new Guide("", 0.0,0.0,0.0);
+    //guide.addEventListener("onClick", clickGuide, false);
+    console.log("------------CAMERA----------");
+    guide.getVisitorDistance();
 }
 
 class Guide
@@ -34,11 +36,23 @@ class Guide
         guide.setAttribute('rotation', this.rotation);
 
         this.scene.appendChild(guide);
-    } 
+    }
+
+    getVisitorDistance(){
+        console.log(document.getElementById("camera").getAttribute("position"));
+    }
 
     Execute(acteur)
     {
 
     }
+
+
 };
+
+function clickGuide(){
+    console.log(document.getElementById("camera").getAttribute("position"));
+}
+
+
 

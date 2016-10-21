@@ -27,7 +27,7 @@ class Waiting extends State {
 		}
 
 		else{
-			console.log("lalalala je ne vois rien");
+			console.log("lalalala je ne vois personne en Harley Davidson");
 		}
 
 	}
@@ -78,4 +78,7 @@ class Lead extends State {
 		console.log("exit function");
 	}		
 }
+
+currentState = new Waiting();
+currentState.enter();
 	
