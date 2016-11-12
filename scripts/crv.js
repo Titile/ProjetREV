@@ -27,15 +27,17 @@ function init() {
 	document.getElementById("cube").addEventListener('click',onClick);
 	*/
 
-    // Gestion du click sur une sphère
+    // Gestion du click sur une sphï¿½re
     document.getElementById("sphere1").addEventListener('click', onClick)
     document.getElementById("sphere2").addEventListener('click', onClick)
     document.getElementById("sphere3").addEventListener('click', onClick)
+    document.getElementById("panda").addEventListener('click', onClick);
   
 }
 
 function onClick(e)
 {
+    alert("hÃ©ho")
     positionReached = setInterval(moveThatShit, 50);
     positionBoule = this.getAttribute("position")
     this.setAttribute('material', 'color', 'red');
@@ -44,7 +46,7 @@ function onClick(e)
 function moveThatShit()
 {
   
-    // Récupération de la position de la caméra
+    // Rï¿½cupï¿½ration de la position de la camï¿½ra
     var positionCamera = document.getElementById("camera").getAttribute("position")
 
     if (positionCamera > positionBoule.x + 0.5)
@@ -66,7 +68,7 @@ function moveThatShit()
     }
     document.getElementById("camera").setAttribute("position", positionCamera)
 
-    // Test pour savoir si la caméra a atteint la position
+    // Test pour savoir si la camï¿½ra a atteint la position
     if (positionCamera.x == positionBoule.x && positionCamera.z == positionBoule.z) clearInterval(positionReached)
 }
 
