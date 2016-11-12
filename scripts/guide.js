@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", init, false);
 
+
 function init()
 {
+
+
     guide = new Guide("panda", 4.0,0.0,0.0);
 
     //guide.addEventListener('click', onClick);
 	document.getElementById("panda").addEventListener('click',onClick);
+
 
 
 }
@@ -38,6 +42,22 @@ class Guide
         guide.setAttribute('scale', this.scale);  
 
         this.scene.appendChild(guide);
-    } 
+    }
+
+    getVisitorDistance(){
+        console.log(document.getElementById("camera").getAttribute("position"));
+    }
+
+    Execute(acteur)
+    {
+
+    }
+
 };
+
+function clickGuide(){
+    console.log(document.getElementById("camera").getAttribute("position"));
+}
+
+
 
