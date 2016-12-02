@@ -78,9 +78,13 @@ class Guide
     {
         // Récupération de la caméra
         var camera = document.getElementById("camera");
+        var guide = document.getElementById("panda");
+
+        var positionCamera = camera.getAttribute('position');
+        var positionGuide = guide.getAttribute('position');
 
         // Calcul de la distance dans l'espace
-        var distance = sqrt((camera.getAttribute('position').x - document.getElementById("panda").getAttribute("position").x)*(camera.getAttribute('position').x - document.getElementById("panda").getAttribute("position").x) + (camera.getAttribute('position').y - document.getElementById("panda").getAttribute("position").y)*(camera.getAttribute('position').y - document.getElementById("panda").getAttribute("position").y) +  (camera.getAttribute('position').z - document.getElementById("panda").getAttribute("position").z)*(camera.getAttribute('position').z - document.getElementById("panda").getAttribute("position").z))
+        var distance = sqrt((positionCamera.x - positionGuide.x)*(positionCamera.x - positionGuide.x) + (positionCamera.y - positionGuide.y)*(positionCamera.y - positionGuide.y) +  (positionCamera.z - positionGuide.z)*(positionCamera.z - positionGuide.z));
         
         // Valeur arbitraire
         if(distance > 1)
@@ -90,24 +94,6 @@ class Guide
         return false;        
     }
 
-    // Lorsque le guide a atteint l'utilisateur
-    userReached()
-    {
-        // Récupération de la caméra
-        var camera = document.getElementById("camera");
-
-        // Calcul de la distance dans l'espace
-        var distance = Math.sqrt((camera.getAttribute('position').x - document.getElementById("panda").getAttribute("position").x)*(camera.getAttribute('position').x - document.getElementById("panda").getAttribute("position").x) + (camera.getAttribute('position').y - document.getElementById("panda").getAttribute("position").y)*(camera.getAttribute('position').y - document.getElementById("panda").getAttribute("position").y) +  (camera.getAttribute('position').z - document.getElementById("panda").getAttribute("position").z)*(camera.getAttribute('position').z - document.getElementById("panda").getAttribute("position").z))
-        
-        
-        // Valeur arbitraire
-        if(distance < 1)
-        {
-            return true;
-        }     
-        return false;   
-    }
-
     // Si l'utilisateur est bien avec le guide
     userWithGuide()
     {
@@ -115,15 +101,32 @@ class Guide
     }
 
     // Si le pingouin a atteint sa cible  
-    targetReached(target)
+    targetReached(targetName)
     {
+        // On récupère la target à atteindre
+        var target = document.getElementById(targetName);
+        var guide = document.getElementById("panda");
+
+        var positionTarget = target.getAttribute('position');
+        var positionGuide = guide.getAttribute('position');
+
+         // Calcul de la distance dans l'espace
+        var distance = sqrt((positionTarget.x - positionGuide.x)*(positionTarget.x - positionGuide.x) + (positionTarget.y - positionGuide.y)*(positionTarget.y - positionGuide.y) +  (positionTarget.z - positionGuide.z)*(positionTarget.z - positionGuide.z));
         
+        // Valeur arbitraire
+        if(distance < 1)
+        {
+            return true;
+        }     
+        return false;   
+
     }
 
-    // La représente la fin de la visite
+    // Représente la fin de la visite
     endVisit()
     {
-
+        // On veut arriver à la cheminée      
+        return targetReached("cheminee");
     }    
 };
 
