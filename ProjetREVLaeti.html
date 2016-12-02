@@ -23,12 +23,34 @@
 
 		<!-- Les modèles à récupérer-->
 		<a-assets>
-			<<a-asset-item id="table-obj" src="modeles/chair_table/table.obj"></a-asset-item>
+				<!-- Table -->
+				<a-asset-item id="table-obj" src="modeles/chair_table/table.obj"></a-asset-item>
 				<a-asset-item id="table-mtl" src="modeles/chair_table/table.mtl"></a-asset-item>
+				<!-- Chaise -->
 				<a-asset-item id="chair-obj" src="modeles/vieille_chaise/chair_granmother.obj"></a-asset-item>
 				<a-asset-item id="chair-mtl" src="modeles/vieille_chaise/chair_granmother.mtl"></a-asset-item>
-				<a-asset-item id="cheminee-obj" src="modeles/cheminee/fireplace1.obj"></a-asset-item>
-				<a-asset-item id="cheminee-mtl" src="modeles/cheminee/fireplace1.mtl"></a-asset-item>
+
+				<a-asset-item id="chair2-obj" src="modeles/chair_office_x/chair_office_x.obj"></a-asset-item>
+				<a-asset-item id="chair2-mtl" src="modeles/chair_office_x/chair_office_x.mtl"></a-asset-item>
+
+				<!-- Cheminée --> 
+				<a-asset-item id="cheminee-obj" src="modeles/fireplace2/fireplace2.obj"></a-asset-item>
+				<a-asset-item id="cheminee-mtl" src="modeles/fireplace2/fireplace2.mtl"></a-asset-item>
+
+				<!-- Commode -->
+				<a-asset-item id="commode-obj" src="modeles/hallTable/hallTable.obj"></a-asset-item>
+				<a-asset-item id="commode-mtl" src="modeles/hallTable/hallTable.mtl"></a-asset-item>
+
+				<!-- Chandelier --> 
+				<a-asset-item id="chandelier-obj" src="modeles/chandelier-lamp/chandelier-lamp.obj"> </a-asset-item>
+				<a-asset-item id="chandelier-mtl" src="modeles/chandelier-lamp/chandelier-lamp.mtl"> </a-asset-item>
+
+				<!-- Armoire -->
+				<a-asset-item id="armoire-obj" src="modeles/mobileCiliegio/mobileCiliegio.obj"> </a-asset-item>
+				<a-asset-item id="armoire-mtl" src="modeles/mobileCiliegio/mobileCiliegio.mtl"> </a-asset-item>
+				
+				<!-- Venus de Milo -->
+				<!-- <a-asset-item id="venus-obj" src="modeles/venus/VenusDeMilo.obj>"> </a-asset-item> -->
 
 
 				<!--mixin-->
@@ -98,10 +120,10 @@
 		<a-box color="#FFF" width="4" height="10" depth="2" position="0 7.25 6" scale="5 0.1 0.2" material="src: url(textures/poutre.jpg); repeat: 15 1"></a-box>
 
 		<!-- Les grosses poutres-->
-		<a-box width="1" height="20" depth="1" rotation="90 90 90" position="4 7 0" material="side: double; src: url(textures/wood.jpg)">
+		<a-box width="1" height="12" depth="1" rotation="90 90 90" position="4 7 0" material="side: double; src: url(textures/wood.jpg)">
 		</a-box>
 
-		<a-box width="1" height="20" depth="1" rotation="90 90 90" position="-5 7 0" material="side: double; src: url(textures/wood.jpg)">
+		<a-box width="1" height="12" depth="1" rotation="90 90 90" position="-5 7 0" material="side: double; src: url(textures/wood.jpg)">
 		</a-box>
 
 
@@ -182,32 +204,84 @@
 		</a-entity>
 
 		<!-- chaises  -->
-		<a-obj-model id="chaise-1" src="#chair-obj" mtl="#chair-mtl" rotation="0 0 0" position="-2.3 0.0 -5.20" scale="0.02 0.02 0.02">
-		</a-obj-model>
+		<a-obj-model id="chaise-1" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="4 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>		
 
-		<a-obj-model id="chaise-2" src="#chair-obj" mtl="#chair-mtl" rotation="0 0 0" position="-4.0 0.0 -5.20" scale="0.02 0.02 0.02">
-		</a-obj-model>
+		<a-obj-model id="chaise-2" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="2.5 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>
+
+		<a-obj-model id="chaise-3" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="1 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>
+
+		<!-- Cheminée -->
+		<a-obj-model id="cheminee" src="#cheminee-obj" mtl="#cheminee-mtl" position="-1.4 1.5 -5.5" scale="0.035 0.03 0.02"></a-obj-model>
+		
+		<!-- Encore des chaises -->
+		<a-obj-model id="chaise-4" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="-4 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>
+
+		<a-obj-model id="chaise-5" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="-5.5 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>
+
+		<a-obj-model id="chaise-6" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="-7 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>
+
+		<a-obj-model id="chaise-7" src="#chair2-obj" mtl="#chair2-mtl" rotation="0 0 0" position="-8.5 0.0 -5.20" scale="0.02 0.02 0.02"></a-obj-model>
+	   
+		<!-- Commodes -->
+		<a-obj-model id="commode-1" src="#commode-obj" mtl="#commode-mtl" rotation = "0 -90 0" position = "8.9 0 -5" scale="0.02 0.02 0.02"> </a-obj-model> 
+		<a-obj-model id="commode-2" src="#commode-obj" mtl="#commode-mtl" rotation = "0 -90 0" position = "8.9 0 3" scale="0.02 0.02 0.02"> </a-obj-model> 
+
+		<!-- Chandelier --> 
+		<a-obj-model id="chandelier-1" src="#chandelier-obj" mtl="#chandelier-mtl" scale="0.015 0.015 0.015" position ="-5 2.2 0" > </a-obj-model>
+		<a-obj-model id="chandelier-2" src="#chandelier-obj" mtl="#chandelier-mtl" scale="0.015 0.015 0.015" position ="4 2.2 0"> </a-obj-model>
+
+		
+		<!-- Une autre porte -->
+		<a-entity geometry="primitive: plane; width: 3; height: 4" position="6 2 5.95" material="side: double; src: url(textures/door.jpg)"></a-entity>
+
+		<!-- Le cadre de l'autre porte-->
+		<a-box width="4" height="2" position="4.5 2 6" scale="1 0.1 0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)">
+		</a-box>
+
+		<a-box width="3" height="2" position="6 3.9 6" scale="1 0.1 0.2" rotation="90 90 90" material="src: url(textures/boiserie.jpg)"></a-box>
+
+		<a-box width="4" height="2" position="7.5 2 6" scale="1 0.1 0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)">
+		</a-box>
+
+		<!-- Armoire -->
+		<a-obj-model id="armoire-1" src="#armoire-obj" mtl="#armoire-mtl" scale="0.04 0.02 0.02" position ="3 0 5" rotation = "0 -180 0"> </a-obj-model>
 
 
+		<!-- Encore une autre porte -->
+		<a-entity geometry="primitive: plane; width: 3; height: 4" position="-6 2 -5.95" material="side: double; src: url(textures/door.jpg)"></a-entity>
 
-		<a-obj-model id="chaise-3" src="#chair-obj" mtl="#chair-mtl" rotation="0 90 0" position="-0.5 0 0.0 0.0">
-		</a-obj-model>
+		<!-- Le cadre de encore l'autre porte-->
+		<a-box width="4" height="2" position="-4.5 2 -6" scale="1 0.1 0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)">
+		</a-box>
 
-		<a-obj-model id="chaise-4" src="#chair-obj" mtl="#chair-mtl" rotation="0 -90 0" position="0.5 0.0 0.0">
-		</a-obj-model>
+		<a-box width="3" height="2" position="-6 3.9 -6" scale="1 0.1 0.2" rotation="90 90 90" material="src: url(textures/boiserie.jpg)"></a-box>
 
+		<a-box width="4" height="2" position="-7.5 2 -6" scale="1 0.1 0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)">
+		</a-box>
 
+		<!-- Une dernière autre porte -->
+		<a-entity geometry="primitive: plane; width: 3; height: 4" position="-6 2 5.95" material="side: double; src: url(textures/door.jpg)"></a-entity>
 
-		<!-- DEUXIEME PARTIE PROJET REV-->
-		<!-- Des sphères blanches translucides -->
-		<a-sphere id="sphere1" color="white" radius="1" opacity="0.5" position="-7 2 0"></a-sphere>
-		<a-sphere id="sphere2" color="white" radius="1" opacity="0.5" position="3 2 4"></a-sphere>
-		<a-sphere id="sphere3" color="white" radius="1" opacity="0.5" position="0 2 -4"></a-sphere>
+		<!-- Le cadre de la dernière porte-->
+		<a-box width="4" height="2" position="-4.5 2 6" scale="1 0.1 0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)">
+		</a-box>
 
+		<a-box width="3" height="2" position="-6 3.9 6" scale="1 0.1 0.2" rotation="90 90 90" material="src: url(textures/boiserie.jpg)"></a-box>
+
+		<a-box width="4" height="2" position="-7.5 2 6" scale="1 0.1 0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)">
+		</a-box>
+		
+		<!-- Micheline de Milo -->
+		
+
+		<!-- Des tableaux -->
+		
 	</a-scene>
 
 	<!--<script src="scripts/mobile.js"></script>
 	<script src="scripts/crv.js"></script>-->
-    <script src="scripts/pingouin_Laeti.js"> </script>
+    <!-- <script src="scripts/pingouin_Laeti.js"> </script> -->
+
+	<script src="scripts/ikea.js"> </script> 
 </body>
 </html>
