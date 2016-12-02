@@ -73,6 +73,7 @@ class Guide
 
 
 // Les transistions
+    // Si l'utilisateur est perdu 
     userLost()
     {
         // Récupération de la caméra
@@ -89,7 +90,7 @@ class Guide
         return false;        
     }
 
-
+    // Lorsque le guide a atteint l'utilisateur
     userReached()
     {
         // Récupération de la caméra
@@ -107,16 +108,19 @@ class Guide
         return false;   
     }
 
+    // Si l'utilisateur est bien avec le guide
     userWithGuide()
     {
-
+        return !userLost();
     }
 
-    targetReached()
+    // Si le pingouin a atteint sa cible  
+    targetReached(target)
     {
-
+        
     }
 
+    // La représente la fin de la visite
     endVisit()
     {
 
