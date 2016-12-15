@@ -83,7 +83,7 @@ class SeekVisitor extends State
 	{
 		var visitor = document.getElementById("camera");
 		guide.setObjToReach(visitor);
-		var positionReached = guide.moveTo();
+		var positionReached = guide.moveToVisitor();
 		if(positionReached)
 		{
 			fsm.ChangeState(speak);
@@ -111,9 +111,6 @@ class Speak extends State
 	}
 
 	exit(){
-		alert("exit speak");
-
-		console.log("exit function");
 	}
 
 }

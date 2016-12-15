@@ -19,14 +19,12 @@ function init()
 function onGuideClick(e) 
 {  
     start = true; 
-
     if(firstStart)
     {
         alert("Bonjour, je suis arrivé");
     }
     firstStart = false;
 }
-
 
 class Guide
 {
@@ -72,47 +70,28 @@ class Guide
         }
         else if(this.nbSpeakToUser==1)
         {
-             confirm("S'il vous plait, veuillez me suivre, il n'est pas conseillé de se promener tout seul.")
+             alert("S'il vous plait, veuillez me suivre, il n'est pas conseillé de se promener tout seul.");
         }
         else if(this.nbSpeakToUser==2)
         {
-             confirm("S'il vous plait, Arretez de partir comme ça et suivez moi.")
+             alert("S'il vous plait, Arretez de partir comme ça et suivez moi.");
+        }
+        else{
+            alert("Bon ça suffit, j'arrête la visite.")
         }
         return true;
     }
 
-    moveTo()
+    moveToVisitor()
     {
+        this.lookAt(objToReach);
         var posobjToReach = objToReach.getAttribute('position');
+        var rotObjToReach = objToReach.getAttribute("rotation");
+
         var guide =  document.getElementById("guide");
         var guidePos = guide.getAttribute("position");
 
-        if (guidePos.x > posobjToReach.x + 0.5)
-        {
-            guidePos.x-=0.1;
-        }
-        else if(guidePos.x < posobjToReach.x - 0.5)
-        {
-            guidePos.x += 0.1;
-        }
-        else
-        {
-            guidePos.x = posobjToReach.x;
-        }
-        // Gestion de la position en Z
-        if (guidePos.z > posobjToReach.z + 0.5)
-        {
-            guidePos.z -= 0.1;
-        }
-        else if(guidePos.z < posobjToReach.z - 0.5)
-        {
-            guidePos.z += 0.1;
-        }
-        else
-        {
-            guidePos.z = posobjToReach.z;
-        }
-
+        guidePos = setPosition(guidePos, posobjToReach);
         guide.setAttribute("position", guidePos);
 
         // Test pour savoir si la camera a atteint la position
@@ -123,45 +102,22 @@ class Guide
         }
     }
 
-    goToHell()
+    moveToSphere()
     {
         var posobjToReach = objToReach.getAttribute('position');
         var guide =  document.getElementById("guide");
         var guidePos = guide.getAttribute("position");
 
-        if (guidePos.x > posobjToReach.x + 0.5)
-        {
-            guidePos.x-=0.05;
-        }
-        else if(guidePos.x < posobjToReach.x - 0.5)
-        {
-            guidePos.x += 0.05;
-        }
-        else
-        {
-            guidePos.x = posobjToReach.x;
-        }
-        // Gestion de la position en Z
-        if (guidePos.z > posobjToReach.z + 0.5)
-        {
-            guidePos.z -= 0.05;
-        }
-        else if(guidePos.z < posobjToReach.z - 0.5)
-        {
-            guidePos.z += 0.05;
-        }
-        else
-        {
-            guidePos.z = posobjToReach.z;
-        }
+        guidePos = setPosition(guidePos, posobjToReach);
 
         guide.setAttribute("position", guidePos);
+
+        this.lookAt(objToReach);
 
         // Test pour savoir si la camera a atteint la position
         if(distance(posobjToReach, guidePos)<0.5)
         {
             guide.setAttribute("position", {x:posobjToReach.x, y:0, z:posobjToReach.z});
-            //clearInterval(positionReached);
             nextTarget++;
             alert("Profiter de cet instant pour admirer.")
         }
@@ -180,7 +136,28 @@ class Guide
         path = [sphereBobEponge, sphereLaitierePipe, sphereFenetre, sphereMonsieurPomme,sphereJeuneFillePerle,sphereCheminee,sphereAccueil]
         target = path[nextTarget];
         this.setObjToReach(target);
-        this.goToHell();
+        this.moveToSphere();
+    }
+
+    lookAt(theTarget)
+    {
+        // quand l'user a une rotation de 0 le pingouin a une rotation de 45 
+        var newRotation;
+        var penguin = document.getElementById("guide");
+
+        if(theTarget.getAttribute("id") == "camera")
+        {
+            var rotation = theTarget.getAttribute("rotation");    
+            newRotation = {x:-90, y:rotation.y-90, z:0};
+            penguin.setAttribute("rotation", newRotation);
+        }
+        else
+        {
+            var rotation =document.getElementById("camera").getAttribute("rotation"); 
+            newRotation = {x:-90, y:rotation.y + 90, z:0};
+            penguin.setAttribute("rotation", newRotation);
+        }
+        
     }
 
     // Action du guide 
@@ -217,28 +194,6 @@ class Guide
         return !this.userLost();
     }
 
-    // Si le pingouin a atteint sa cible  
-    targetReached(targetName)
-    {
-        // On récupère la target à atteindre
-        var target = document.getElementById(targetName);
-        var guide = document.getElementById("guide");
-
-        var positionTarget = target.getAttribute('position');
-        var positionGuide = guide.getAttribute('position');
-
-         // Calcul de la distance dans l'espace
-        var distance = Math.sqrt((positionTarget.x - positionGuide.x)*(positionTarget.x - positionGuide.x) + (positionTarget.y - positionGuide.y)*(positionTarget.y - positionGuide.y) +  (positionTarget.z - positionGuide.z)*(positionTarget.z - positionGuide.z));
-     
-        // Valeur arbitraire
-        if(distance <  3.5)
-        {
-            return true;
-        }     
-        return false;   
-
-    }
-
     // Représente la fin de la visite
     endVisit()
     {
@@ -250,4 +205,35 @@ class Guide
 function distance(a,b)
 {
     return Math.sqrt((a.x - b.x)*(a.x - b.x) +  (a.z - b.z)*(a.z - b.z));
+}
+
+function setPosition(myPos, posToReach)
+{
+    if (myPos.x > posToReach.x + 0.5)
+    {
+        myPos.x-=0.08;
+    }
+    else if(myPos.x < posToReach.x - 0.5)
+    {
+        myPos.x += 0.08;
+    }
+    else
+    {
+        myPos.x = posToReach.x;
+    }
+    // Gestion de la position en Z
+    if (myPos.z > posToReach.z + 0.5)
+    {
+        myPos.z -= 0.08;
+    }
+    else if(myPos.z < posToReach.z - 0.5)
+    {
+        myPos.z += 0.08;
+    }
+    else
+    {
+        myPos.z = posToReach.z;
+    }
+
+    return myPos;
 }
