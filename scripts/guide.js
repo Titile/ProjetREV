@@ -74,12 +74,11 @@ class Guide
             guidePos.z = visitorPosition.z;
         }
 
-        guide.setAttribute("position", visitorPosition);
+        guide.setAttribute("position", guidePos);
 
         // Test pour savoir si la camera a atteint la position
-        if (Math.abs(visitorPosition.x -guidePos.x)<2 && Math.abs(visitorPosition.z - guidePos.z)<2)
+        if (Math.sqrt((visitorPosition.x - guidePos.x)*(visitorPosition.x -guidePos.x) +(visitorPosition.z - guidePos.z)*(visitorPosition.x -guidePos.x))<1)
         {
-            alert("position reached");
             return true;
         }
     }

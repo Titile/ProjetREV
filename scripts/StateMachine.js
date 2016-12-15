@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", init, false);
+
 class Automate
 {
     // Architecture de l'automate qui va servir au pingouin
@@ -51,7 +53,8 @@ class Waiting extends State
 {
 	enter()
     {
-        this.interval = setInterval(this.execute,50);
+		alert("Waiting");
+        targetReached = setInterval(this.execute,50);
 	}
 
 	execute()
@@ -64,13 +67,15 @@ class Waiting extends State
 		}
 
 		else{
-            clearInterval(this.interval);
 			console.log("lalalala je ne vois personne en Harley Davidson");
 		}
 
 	}
 
 	exit(){
+		alert("Stop Waiting");
+		clearInterval(targetReached);
+
 		console.log("exit function");
 	}		
 }
@@ -79,22 +84,23 @@ class SeekVisitor extends State
 {
 	enter()
 	{
-		this.execute();
-        this.interval = setInterval(this.execute,50);
+        targetReached = setInterval(this.execute,50);
 	}
 
 	execute()
 	{
-		// var positionReached = guide.MoveToVisitor();
-		// if(positionReached)
-		// {
-		// 	fsm.ChangeState(speak);
-		// }		
+		var positionReached = guide.MoveToVisitor();
+		if(positionReached)
+		{
+			fsm.ChangeState(speak);
+		}		
 	}
 
 	exit(){
 		//clearInterval(this.interval);
 		//alert("je quitte le seek")
+		clearInterval(targetReached);
+
 		console.log("exit function");
 	}		
 }
@@ -102,6 +108,8 @@ class SeekVisitor extends State
 class Speak extends State 
 {
 	enter(){
+		this.execute();
+		alert("Enter speak");
 		console.log("enter function");
 	}
 
@@ -111,6 +119,8 @@ class Speak extends State
 	}
 
 	exit(){
+		alert("exit speak");
+
 		console.log("exit function");
 	}		
 }
@@ -136,8 +146,12 @@ var speak = new Speak();
 var seekVisitor = new SeekVisitor();
 var lead = new Lead();
 
-// Définition guide 
-var guide = new Guide("guide");
+var guide; 
+var fsm;
+var targetReached;
 
-// Définition machine à état
-var fsm = new Automate(guide, waiting);
+function init()
+{
+	guide = new Guide("guide");
+	fsm = new Automate(guide, waiting);
+}
