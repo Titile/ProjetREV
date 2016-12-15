@@ -13,7 +13,7 @@
 	<a-scene stats="false" vr-mode-ui="enabled: false">
 
 		<!-- La caméra -->
-		<a-entity id="camera" camera="userHeight: 2.0" look-controls wasd-controls>
+		<a-entity id="camera" camera="userHeight: 2.0" look-controls wasd-controls position="-6 0 4" rotation="0 -45 0">
 			<a-entity cursor="fuse: false; fuseTimeout: 500" position="0 0 -0.2" geometry="primitive: sphere ; radius: 0.01 " material="color: pink; transparent: true; opacity:0.3;  shader: flat">
 			</a-entity>
 		</a-entity>
@@ -49,13 +49,9 @@
 				<a-asset-item id="armoire-obj" src="modeles/mobileCiliegio/mobileCiliegio.obj"> </a-asset-item>
 				<a-asset-item id="armoire-mtl" src="modeles/mobileCiliegio/mobileCiliegio.mtl"> </a-asset-item>
 				
-				<!-- Venus de Milo -->
-				<!-- <a-asset-item id="venus-obj" src="modeles/venus/VenusDeMilo.obj>"> </a-asset-item> -->
-
-
 				<!--mixin-->
 				<a-mixin id="wood" material="side: double; src: url(textures/wood.jpg)"></a-mixin>
-				<a-mixin id="planche" geometry="primitive:box; height:0.2; width:6; depth:4"></a-mixin>
+				<a-mixin id="planche" geometry="primitive:sphere; height:0.2; width:4; depth:2"></a-mixin>
 				<a-mixin id="pied_table" geometry="primitive:box; height:1.1; width:0.4; depth:0.5"></a-mixin>
 				<a-mixin id="cadre-porte" geometry="primitive:box; height:0.2; width:4; depth:0.2" rotation="0 90 90" material="src: url(textures/boiserie.jpg)"></a-mixin>
 
@@ -176,26 +172,23 @@
 		</a-entity>
 
 		<!-- Repère de la scène repeat: 100 20 -->
-		<a-sphere radius="0.2"></a-sphere>
+		<!--<a-sphere radius="0.2"></a-sphere>
 		<a-cylinder height="3.0" color="green" radius="0.05" position="0.0 1.5 0.0"></a-cylinder>
 		<a-cylinder height="3.0" color="red" radius="0.05" position="1.5 0.0 0.0" rotation="0 0 -90"></a-cylinder>
 		<a-cylinder height="3.0" color="blue" radius="0.05" position="0.0 0.0 1.5" rotation="90 0 0"></a-cylinder>
 
 		<a-sphere radius="0.2" color="red" position="4 0 0"></a-sphere>
 		<a-sphere radius="0.2" color="green" position="0 4 0"></a-sphere>
-		<a-sphere radius="0.2" color="blue" position="0 0 4"></a-sphere>
+		<a-sphere radius="0.2" color="blue" position="0 0 4"></a-sphere>-->
 
 		<!-- table -->
 		<a-entity id="table">
-			<a-entity mixin="wood planche" position="0 1.1 0">
+			<a-entity mixin="wood planche" position="0 1.1 0"  scale="2 0.1 2">
 			</a-entity>
 
 			<!--pied de la table-->
-
-			<a-entity mixin="wood pied_table" position="-2.5 0.5 1.5"></a-entity>
-			<a-entity mixin="wood pied_table" position="2.5 0.5 1.5"></a-entity>
-			<a-entity mixin="wood pied_table" position="-2.5 0.5 -1.5"></a-entity>
-			<a-entity mixin="wood pied_table" position="2.5 0.5 -1.5"></a-entity>
+			<a-entity mixin="wood pied_table" position=" 0 0.5 0"></a-entity>
+	
 
 		</a-entity>
 
@@ -214,6 +207,28 @@
 		<a-obj-model id="cheminee" src="#cheminee-obj" mtl="#cheminee-mtl" position="-1.4 1.5 -5.5" scale="0.035 0.03 0.02"></a-obj-model>
 	
 		
+
+		<!--Sphere translucide pour déplacement-->		
+		<!-- Position tableau --> 
+		<a-sphere id="sphereMonsieurPomme" radius="0.5" color="white" opacity="0.7" position="7 2 -4"></a-sphere>
+		<a-sphere id="sphereLaitierePipe" radius="0.5" color="white" opacity="0.7" position="6 2 5"></a-sphere>
+
+		<a-sphere id="sphereJeuneFillePerle" radius="0.5" color="white" opacity="0.7" position="2 2 -4.5"></a-sphere>
+		<a-sphere id="sphereBobEponge" radius="0.5" color="white" opacity="0.7" position="-2.5 2 4.5"></a-sphere>
+
+		<!--<a-sphere id="sphere-dir-5" radius="0.5" color="white" opacity="0.7" position="5.5 2 5.5"></a-sphere>-->
+		<a-sphere id="sphereBretagne" radius="0.5" color="white" opacity="0.7" position="-9.5 2 0"></a-sphere>
+
+		<!-- Position cheminée --> 
+		<a-sphere id="sphereCheminee" radius="0.8" color="white" opacity="0.7" position="-1.4 2 -4"></a-sphere>
+
+		<!-- Position fenetre -->
+		<a-sphere id="sphereFenetre" radius="0.5" color="white" opacity="0.7" position="9 2 0"></a-sphere>
+
+		<!-- Position accueil -->
+		<a-sphere id="sphereAccueil" radius="0.5" color="white" opacity="0.7" position="2.5 2 0"></a-sphere>
+
+
 	</a-scene>
 
     <script src="scripts/Guide.js"></script>
