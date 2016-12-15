@@ -3,12 +3,10 @@ class Automate
     // Architecture de l'automate qui va servir au pingouin
     constructor(acteur, currentState)
     {
-		alert("automate created");
         this.Acteur = acteur;
         this.CurrentState = currentState;
         this.CurrentState.enter();
         this.PreviousState = null;
-
     }
 
     // Ce qui va faire évoluer l'état de l'automate 
@@ -30,7 +28,6 @@ class Automate
         this.ChangeState(self.PreviousState);
     }
 }
-
 
 class State 
 {
@@ -54,7 +51,6 @@ class Waiting extends State
 {
 	enter()
     {
-        alert("I'm in the waiting state");
         this.interval = setInterval(this.execute,50);
 	}
 
@@ -62,8 +58,8 @@ class Waiting extends State
     {     
 		var acteur = fsm.Acteur;
 
-		if (acteur.isHere()){
-			alert("Changing state from waiting to seekVisitor");
+		if (acteur.userIsHere()){
+			console.log("Changing state from waiting to seekVisitor");
 			fsm.ChangeState(seekVisitor);
 		}
 
@@ -75,24 +71,30 @@ class Waiting extends State
 	}
 
 	exit(){
-        alert("exit the waiting state");
 		console.log("exit function");
 	}		
 }
 
 class SeekVisitor extends State 
 {
-	enter(fsm){
-        alert("I'm in seek visdiobnoifseeg,x");
-
-		console.log("enter function");
+	enter()
+	{
+		this.execute();
+        this.interval = setInterval(this.execute,50);
 	}
 
-	execute(){
-		console.log("execute function");
+	execute()
+	{
+		// var positionReached = guide.MoveToVisitor();
+		// if(positionReached)
+		// {
+		// 	fsm.ChangeState(speak);
+		// }		
 	}
 
 	exit(){
+		//clearInterval(this.interval);
+		//alert("je quitte le seek")
 		console.log("exit function");
 	}		
 }
@@ -104,7 +106,8 @@ class Speak extends State
 	}
 
 	execute(){
-		console.log("execute function");
+		alert('Bonjour et bienvenu dans cette partie du musée. Si vous voulez bien me suivre ? ');
+
 	}
 
 	exit(){
@@ -127,10 +130,14 @@ class Lead extends State
 	}		
 }
 
+// Définition états 
 var waiting = new Waiting();
 var speak = new Speak();
 var seekVisitor = new SeekVisitor();
 var lead = new Lead();
 
+// Définition guide 
 var guide = new Guide("guide");
+
+// Définition machine à état
 var fsm = new Automate(guide, waiting);

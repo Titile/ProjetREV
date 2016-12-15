@@ -1,6 +1,8 @@
+var visitor = document.getElementById("camera");
+
 function onGuideClick(e) 
 {  
-
+    alert("Bonjour, je suis arrivé");
 }
 
 class Guide
@@ -8,9 +10,6 @@ class Guide
     constructor(id)
     {
         this.id = id;
-   
-        console.log("Instantiation")
-
         // Récupération de la scène
         var scene = document.querySelector('a-scene');
 
@@ -26,79 +25,70 @@ class Guide
 
         // Gestion du clic
         guide.addEventListener('click', onGuideClick);
-
         scene.appendChild(guide);
-
-        // On le lance
-       // var automate = new Automate(this, Waiting);
-        //setInterval(automate.Execute());
     }
 
-    setPosition(x, y, z){
+    setPosition(x, y, z)
+    {
       this.position = {"x": x, "y":y, "z":z};
-
-      var guide = document.getElementById(this.name);
-
+      var guide = document.getElementById(this.id);
       guide.setAttribute('position', this.position);
     }
 
-    getVisitorDistance(){
-
-        var cameraPosition = document.getElementById("camera").getAttribute("position")
+    getVisitorDistance()
+    {
+        var cameraPosition = visitor.getAttribute("position")
         var distance = Math.sqrt((this.position.x - cameraPosition.x)*(this.position.x - cameraPosition.x)+(this.position.z - cameraPosition.z)*(this.position.z - cameraPosition.z));
-        console.log("distance pigou camera: " + distance );
+        return distance;
     }
 
-    getCameraPosition(){
-      return (document.getElementById("camera").getAttribute("position"));
+    MoveToVisitor()
+    {
+        var visitorPosition = document.getElementById("camera").getAttribute("position");
+        var guide =  document.getElementById("guide");
+        var guidePos = guide.getAttribute("position");
+
+        if (guidePos.x > visitorPosition.x + 0.5)
+        {
+            guidePos.x-=0.1;
+        }
+        else if(guidePos.x < visitorPosition.x - 0.5)
+        {
+            guidePos.x += 0.1;
+        }
+        else
+        {
+            guidePos.x = visitorPosition.x;
+        }
+        // Gestion de la position en Z
+        if (guidePos.z > visitorPosition.z + 0.5)
+        {
+            guidePos.z -= 0.1;
+        }
+        else if(guidePos.z < visitorPosition.z - 0.5)
+        {
+            guidePos.z += 0.1;
+        }
+        else
+        {
+            guidePos.z = visitorPosition.z;
+        }
+
+        guide.setAttribute("position", visitorPosition);
+
+        // Test pour savoir si la camera a atteint la position
+        if (Math.abs(visitorPosition.x -guidePos.x)<2 && Math.abs(visitorPosition.z - guidePos.z)<2)
+        {
+            alert("position reached");
+            return true;
+        }
     }
-
-    // MoveToCamera(pigou)
-    // {
-    //   var cameraPosition = pigou.getCameraPosition();
-    //   var pigouPos = pigou.position;
-
-    //   if (pigouPos.x > cameraPosition.x + 0.5)
-    //   {
-    //       pigouPos.x-=0.1;
-    //   }
-    //   else if(pigouPos.x < cameraPosition.x - 0.5)
-    //   {
-    //       pigouPos.x += 0.1;
-    //   }
-    //   else
-    //   {
-    //       pigouPos.x = cameraPosition.x;
-    //   }
-    //   // Gestion de la position en Z
-    //   if (pigouPos.z > cameraPosition.z + 0.5)
-    //   {
-    //       pigouPos.z -= 0.1;
-    //   }
-    //   else if(pigouPos.z < cameraPosition.z - 0.5)
-    //   {
-    //       pigouPos.z += 0.1;
-    //   }
-    //   else
-    //   {
-    //       pigouPos.z = cameraPosition.z;
-    //   }
-
-
-    //   pigou.setPosition(pigouPos.x, pigouPos.y, pigouPos.z);
-
-    //   // Test pour savoir si la camera a atteint la position
-    //   if (Math.abs(cameraPosition.x - pigou.position.x)<2 && Math.abs(cameraPosition.z - pigou.position.z)<2)
-    //   {
-    //       clearInterval(cameraReached);
-    //   }
-    // }
 
     // Action du guide 
 
     // Les transistions
     // si l'utilisateur est là 
-    isHere()
+    userIsHere()
     {
         return true;
     }
