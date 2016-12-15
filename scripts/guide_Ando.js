@@ -1,20 +1,4 @@
-document.addEventListener("DOMContentLoaded", init, false);
-
-function init()
-{
-    guide = new Guide("panda", 4.0,0.0,0.0);
-
-    //guide.addEventListener('click', onClick);
-	document.getElementById("panda").addEventListener('click',onClick);
-
-
-}
-
-function onClick()
-{
-    alert("je me suis fais clicker");
-}
-
+//document.addEventListener("DOMContentLoaded", init, false);
 
 class Guide
 {
@@ -37,7 +21,115 @@ class Guide
         guide.setAttribute('rotation', this.rotation);
         guide.setAttribute('scale', this.scale);  
 
+        guide.addEventListener('click', onGuideClick);
+
         this.scene.appendChild(guide);
-    } 
+    }
+
+
+// Les transistions
+    // Si l'utilisateur est perdu 
+    userLost()
+    {
+        // Récupération de la caméra
+        var camera = document.getElementById("camera");
+        var guide = document.getElementById("guide");
+
+        var positionCamera = camera.getAttribute('position');
+        var positionGuide = guide.getAttribute('position');
+
+        // Calcul de la distance dans l'espace
+        var distance = Math.sqrt((positionCamera.x - positionGuide.x)*(positionCamera.x - positionGuide.x) + (positionCamera.y - positionGuide.y)*(positionCamera.y - positionGuide.y) +  (positionCamera.z - positionGuide.z)*(positionCamera.z - positionGuide.z));
+        alert(distance);
+
+        // Valeur arbitraire
+        if(distance > 3)
+        {
+            return true;
+        }     
+        return false;        
+    }
+
+    // Si l'utilisateur est bien avec le guide
+    userWithGuide()
+    {
+        return !userLost();
+    }
+
+    isHere()
+    {
+        return true;
+    }
+
+    // Si le pingouin a atteint sa cible  
+    targetReached(targetName)
+    {
+        // On récupère la target à atteindre
+        var target = document.getElementById(targetName);
+        var guide = document.getElementById("panda");
+
+        var positionTarget = target.getAttribute('position');
+        var positionGuide = guide.getAttribute('position');
+
+         // Calcul de la distance dans l'espace
+        var distance = sqrt((positionTarget.x - positionGuide.x)*(positionTarget.x - positionGuide.x) + (positionTarget.y - positionGuide.y)*(positionTarget.y - positionGuide.y) +  (positionTarget.z - positionGuide.z)*(positionTarget.z - positionGuide.z));
+        
+        // Valeur arbitraire
+        if(distance < 1)
+        {
+            return true;
+        }     
+        return false;   
+
+    }
+
+    // Représente la fin de la visite
+    endVisit()
+    {
+        // On veut arriver à la cheminée      
+        return targetReached("cheminee");
+    }    
 };
+
+class Automate
+{
+    // Architecture de l'automate qui va servir au pingouin
+    constructor(acteur, currentState)
+    {
+        this.fsm = this;
+        this.Acteur = acteur;
+        this.CurrentState = currentState;
+        this.CurrentState.enter(this);
+        this.PreviousState = null;
+    }
+
+    // Ce qui va faire évoluer l'état de l'automate 
+    Execute()
+    {
+        this.CurrentState.execute(this);
+    }
+    // Ce qui va changer l'état de l'automate
+    ChangeState(NewState)
+    {
+        this.PreviousState = this.CurrentState;
+        this.CurrentState.exit();
+        this.CurrentState = NewState;
+        this.CurrentState.enter(this);
+    }
+
+    RevertToPreviousState()
+    {
+        this.ChangeState(self.PreviousState);
+    }
+}
+
+
+var guide = new Guide("guide", 4.0,0.0,0.0);
+var fsm = new Automate(guide, waiting);
+
+
+ function onGuideClick(e) 
+{
+    alert(guide.userLost());
+}
 
