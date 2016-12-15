@@ -1,9 +1,32 @@
+document.addEventListener("DOMContentLoaded", init, false);
+
 var visitor = document.getElementById("camera");
+var start = false;
+var path = [];
+var positionReached;
+var target;
+var nextTarget;
+var objToReach;
+var firstStart;
+
+function init()
+{   
+    nextTarget = 0; 
+    firstStart = true;  
+}
+
 
 function onGuideClick(e) 
 {  
-    alert("Bonjour, je suis arrivé");
+    start = true; 
+
+    if(firstStart)
+    {
+        alert("Bonjour, je suis arrivé");
+    }
+    firstStart = false;
 }
+
 
 class Guide
 {
@@ -12,6 +35,7 @@ class Guide
         this.id = id;
         // Récupération de la scène
         var scene = document.querySelector('a-scene');
+        this.nbSpeakToUser = 0;
 
         // Placement du guide
         var guide = document.createElement('a-obj-model');
@@ -28,71 +52,148 @@ class Guide
         scene.appendChild(guide);
     }
 
-    setPosition(x, y, z)
+    // GESTON DES ACTIONs DU GUIDE 
+    // ==================================================================================
+    setObjToReach(obj)
     {
-      this.position = {"x": x, "y":y, "z":z};
-      var guide = document.getElementById(this.id);
-      guide.setAttribute('position', this.position);
+        objToReach = obj;
     }
 
-    getVisitorDistance()
+    hasLostVisitor()
     {
-        var cameraPosition = visitor.getAttribute("position")
-        var distance = Math.sqrt((this.position.x - cameraPosition.x)*(this.position.x - cameraPosition.x)+(this.position.z - cameraPosition.z)*(this.position.z - cameraPosition.z));
-        return distance;
+        this.nbSpeakToUser ++;
     }
 
-    MoveToVisitor()
+    speak()
     {
-        var visitorPosition = document.getElementById("camera").getAttribute("position");
+        if(this.nbSpeakToUser<1)
+        {
+            alert("Bonjour et bienvenu pour cette visite. Veuillez me suivre tout le long pour que cette visite se passe au mieux")
+        }
+        else if(this.nbSpeakToUser==1)
+        {
+             confirm("S'il vous plait, veuillez me suivre, il n'est pas conseillé de se promener tout seul.")
+        }
+        else if(this.nbSpeakToUser==2)
+        {
+             confirm("S'il vous plait, Arretez de partir comme ça et suivez moi.")
+        }
+        return true;
+    }
+
+    moveTo()
+    {
+        var posobjToReach = objToReach.getAttribute('position');
         var guide =  document.getElementById("guide");
         var guidePos = guide.getAttribute("position");
 
-        if (guidePos.x > visitorPosition.x + 0.5)
+        if (guidePos.x > posobjToReach.x + 0.5)
         {
             guidePos.x-=0.1;
         }
-        else if(guidePos.x < visitorPosition.x - 0.5)
+        else if(guidePos.x < posobjToReach.x - 0.5)
         {
             guidePos.x += 0.1;
         }
         else
         {
-            guidePos.x = visitorPosition.x;
+            guidePos.x = posobjToReach.x;
         }
         // Gestion de la position en Z
-        if (guidePos.z > visitorPosition.z + 0.5)
+        if (guidePos.z > posobjToReach.z + 0.5)
         {
             guidePos.z -= 0.1;
         }
-        else if(guidePos.z < visitorPosition.z - 0.5)
+        else if(guidePos.z < posobjToReach.z - 0.5)
         {
             guidePos.z += 0.1;
         }
         else
         {
-            guidePos.z = visitorPosition.z;
+            guidePos.z = posobjToReach.z;
         }
 
         guide.setAttribute("position", guidePos);
 
         // Test pour savoir si la camera a atteint la position
-        if (Math.sqrt((visitorPosition.x - guidePos.x)*(visitorPosition.x -guidePos.x) +(visitorPosition.z - guidePos.z)*(visitorPosition.x -guidePos.x))<1)
+        if(distance(posobjToReach, guidePos)<1.5)
         {
+            //this.stopAnim();
             return true;
         }
     }
 
+    goToHell()
+    {
+        var posobjToReach = objToReach.getAttribute('position');
+        var guide =  document.getElementById("guide");
+        var guidePos = guide.getAttribute("position");
+
+        if (guidePos.x > posobjToReach.x + 0.5)
+        {
+            guidePos.x-=0.05;
+        }
+        else if(guidePos.x < posobjToReach.x - 0.5)
+        {
+            guidePos.x += 0.05;
+        }
+        else
+        {
+            guidePos.x = posobjToReach.x;
+        }
+        // Gestion de la position en Z
+        if (guidePos.z > posobjToReach.z + 0.5)
+        {
+            guidePos.z -= 0.05;
+        }
+        else if(guidePos.z < posobjToReach.z - 0.5)
+        {
+            guidePos.z += 0.05;
+        }
+        else
+        {
+            guidePos.z = posobjToReach.z;
+        }
+
+        guide.setAttribute("position", guidePos);
+
+        // Test pour savoir si la camera a atteint la position
+        if(distance(posobjToReach, guidePos)<0.5)
+        {
+            guide.setAttribute("position", {x:posobjToReach.x, y:0, z:posobjToReach.z});
+            //clearInterval(positionReached);
+            nextTarget++;
+            alert("Profiter de cet instant pour admirer.")
+        }
+    }
+
+    lead()
+    {
+        var sphereBobEponge = document.getElementById("sphereBobEponge");
+        var sphereLaitierePipe = document.getElementById("sphereLaitierePipe");
+        var sphereFenetre = document.getElementById("sphereFenetre");
+        var sphereMonsieurPomme = document.getElementById("sphereMonsieurPomme");  
+        var sphereJeuneFillePerle = document.getElementById("sphereJeuneFillePerle");
+        var sphereCheminee = document.getElementById("sphereCheminee");
+        var sphereAccueil = document.getElementById("sphereAccueil");
+
+        path = [sphereBobEponge, sphereLaitierePipe, sphereFenetre, sphereMonsieurPomme,sphereJeuneFillePerle,sphereCheminee,sphereAccueil]
+        target = path[nextTarget];
+        this.setObjToReach(target);
+        this.goToHell();
+    }
+
     // Action du guide 
 
-    // Les transistions
+    // GESTION DES TRANSITIONS 
+    // ==========================================================================
     // si l'utilisateur est là 
     userIsHere()
     {
-        return true;
+        return start;
     }
 
-    // Si l'utilisateur est perdu 
+    // Si on a perdu l'utilisateur
     userLost()
     {
         // Récupération de la caméra
@@ -102,11 +203,8 @@ class Guide
         var positionCamera = camera.getAttribute('position');
         var positionGuide = guide.getAttribute('position');
 
-        // Calcul de la distance dans l'espace
-        var distance = Math.sqrt((positionCamera.x - positionGuide.x)*(positionCamera.x - positionGuide.x) + (positionCamera.y - positionGuide.y)*(positionCamera.y - positionGuide.y) +  (positionCamera.z - positionGuide.z)*(positionCamera.z - positionGuide.z));
-
         // Valeur arbitraire
-        if(distance > 3.5)
+        if(distance(positionCamera, positionGuide) > 6)
         {
             return true;
         }     
@@ -148,3 +246,8 @@ class Guide
         return targetReached("cheminee");
     }    
 };
+
+function distance(a,b)
+{
+    return Math.sqrt((a.x - b.x)*(a.x - b.x) +  (a.z - b.z)*(a.z - b.z));
+}

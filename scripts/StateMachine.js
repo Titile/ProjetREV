@@ -53,7 +53,6 @@ class Waiting extends State
 {
 	enter()
     {
-		alert("Waiting");
         targetReached = setInterval(this.execute,50);
 	}
 
@@ -65,17 +64,10 @@ class Waiting extends State
 			console.log("Changing state from waiting to seekVisitor");
 			fsm.ChangeState(seekVisitor);
 		}
-
-		else{
-			console.log("lalalala je ne vois personne en Harley Davidson");
-		}
-
 	}
 
 	exit(){
-		alert("Stop Waiting");
 		clearInterval(targetReached);
-
 		console.log("exit function");
 	}		
 }
@@ -89,18 +81,17 @@ class SeekVisitor extends State
 
 	execute()
 	{
-		var positionReached = guide.MoveToVisitor();
+		var visitor = document.getElementById("camera");
+		guide.setObjToReach(visitor);
+		var positionReached = guide.moveTo();
 		if(positionReached)
 		{
 			fsm.ChangeState(speak);
-		}		
+		}				
 	}
 
 	exit(){
-		//clearInterval(this.interval);
-		//alert("je quitte le seek")
 		clearInterval(targetReached);
-
 		console.log("exit function");
 	}		
 }
@@ -109,34 +100,43 @@ class Speak extends State
 {
 	enter(){
 		this.execute();
-		alert("Enter speak");
-		console.log("enter function");
 	}
 
 	execute(){
-		alert('Bonjour et bienvenu dans cette partie du musée. Si vous voulez bien me suivre ? ');
-
+		var userAnswered = guide.speak();
+		if(userAnswered)
+		{
+			fsm.ChangeState(lead);
+		}
 	}
 
-	exit(){
-		alert("exit speak");
-
-		console.log("exit function");
+	exit()
+	{
 	}		
 }
 
 class Lead extends State 
 {
-	enter(){
-		console.log("enter function");
+	enter()
+	{
+		targetReached = setInterval(this.execute,50);
 	}
 
-	execute(){
-		console.log("execute function");
+	execute(){	
+		if(guide.userWithGuide())
+		{
+			guide.lead();	
+		}	
+		else
+		{
+			guide.hasLostVisitor();
+			fsm.ChangeState(seekVisitor);
+		}
 	}
+
 
 	exit(){
-		console.log("exit function");
+		clearInterval(targetReached);
 	}		
 }
 
