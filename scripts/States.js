@@ -21,7 +21,7 @@ class Waiting extends State {
 	execute(fsm){
 		guide = fsm.guide;
 
-		if (guide.getVisitorDistance < 5){
+		if (guide.getVisitorDistance < 2){
 			console.log("Changing state from waiting to seekVisitor");
 			fsm.changeState(SeekVisitor);
 		}
@@ -33,8 +33,9 @@ class Waiting extends State {
 	}
 
 	exit(){
+		alert("suis moi !");
 		console.log("exit function");
-	}		
+	}
 }
 
 class SeekVisitor extends State {
@@ -48,7 +49,7 @@ class SeekVisitor extends State {
 
 	exit(){
 		console.log("exit function");
-	}		
+	}
 }
 
 class Speak extends State {
@@ -62,7 +63,7 @@ class Speak extends State {
 
 	exit(){
 		console.log("exit function");
-	}		
+	}
 }
 
 class Lead extends State {
@@ -76,9 +77,8 @@ class Lead extends State {
 
 	exit(){
 		console.log("exit function");
-	}		
+	}
 }
 
 currentState = new Waiting();
 currentState.enter();
-	
