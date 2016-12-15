@@ -15,7 +15,7 @@ function init()
     document.getElementById("sphere-dir-2").addEventListener('click', onClickSphere)
     document.getElementById("sphere-dir-3").addEventListener('click', onClickSphere)
     document.getElementById("sphere-dir-4").addEventListener('click', onClickSphere)
-    document.getElementById("guide").addEventListener('click', onClickGuide)
+    document.getElementById("penguin").addEventListener('click', onClickGuide)
 }
 
 function onClickSphere(e)
@@ -50,6 +50,7 @@ function followTraj()
 function stopAnim()
 {
     clearInterval(positionReached)
+
     nextTarget++
     if(nextTarget < 4)
     {

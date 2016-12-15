@@ -1,52 +1,37 @@
-document.addEventListener("DOMContentLoaded", init, false);
+function onGuideClick(e) 
+{  
 
-var pigou ={};
-var cameraReached;
-
-function init()
-{
-
-
-    pigou = new Guide("panda", 4.0,0.0,0.0);
-    console.log(guide);
-
-    //guide.addEventListener('click', onClick);
-}
-
-function onClick(e)
-{
-    pigou.getVisitorDistance();
-    //pigou.MoveToCamera();
-    cameraReached = setInterval(function(){
-      pigou.MoveToCamera(pigou);
-    }, 50);
-    //document.getElementById("panda").getVisitorDistance();
 }
 
 class Guide
 {
-    constructor(name, posX, posY, posZ)
+    constructor(id)
     {
-        this.name = name;
-        this.position = {"x": posX, "y":posY, "z":posZ};
-        this.rotation = {"x":-90, "y":-90, "z":-90};
-        this.scale = {"x": 2.0, "y": 2.0, "z":2.0};
+        this.id = id;
+   
+        console.log("Instantiation")
 
-        this.scene = document.querySelector('a-scene');
+        // Récupération de la scène
+        var scene = document.querySelector('a-scene');
+
+        // Placement du guide
         var guide = document.createElement('a-obj-model');
 
-        guide.setAttribute('id', this.name);
-
+        guide.setAttribute('id', this.id);   
         guide.setAttribute('src', "modeles/penguin/penguin.obj");
-        guide.setAttribute('mtl', "modeles/penguin/penguin.mtl" );
+        guide.setAttribute('mtl', "modeles/penguin/penguin.mtl");
+        guide.setAttribute('position', "-5 0 0")
+        guide.setAttribute('scale', "2 2 2")
+        guide.setAttribute('rotation', "-90 0 0")
 
-        guide.setAttribute('position', this.position);
-        guide.setAttribute('rotation', this.rotation);
-        guide.setAttribute('scale', this.scale);
+        // Gestion du clic
+        guide.addEventListener('click', onGuideClick);
 
-        guide.addEventListener('click',onClick);
+        scene.appendChild(guide);
 
-        this.scene.appendChild(guide);
+        // On le lance
+       // var automate = new Automate(this, Waiting);
+        //setInterval(automate.Execute());
     }
 
     setPosition(x, y, z){
@@ -68,65 +53,109 @@ class Guide
       return (document.getElementById("camera").getAttribute("position"));
     }
 
-    /*getPigouPosition(){
-      return {this.position.x,this.positions.y,this.position.z};
-    }*/
+    // MoveToCamera(pigou)
+    // {
+    //   var cameraPosition = pigou.getCameraPosition();
+    //   var pigouPos = pigou.position;
 
-    Execute(acteur)
+    //   if (pigouPos.x > cameraPosition.x + 0.5)
+    //   {
+    //       pigouPos.x-=0.1;
+    //   }
+    //   else if(pigouPos.x < cameraPosition.x - 0.5)
+    //   {
+    //       pigouPos.x += 0.1;
+    //   }
+    //   else
+    //   {
+    //       pigouPos.x = cameraPosition.x;
+    //   }
+    //   // Gestion de la position en Z
+    //   if (pigouPos.z > cameraPosition.z + 0.5)
+    //   {
+    //       pigouPos.z -= 0.1;
+    //   }
+    //   else if(pigouPos.z < cameraPosition.z - 0.5)
+    //   {
+    //       pigouPos.z += 0.1;
+    //   }
+    //   else
+    //   {
+    //       pigouPos.z = cameraPosition.z;
+    //   }
+
+
+    //   pigou.setPosition(pigouPos.x, pigouPos.y, pigouPos.z);
+
+    //   // Test pour savoir si la camera a atteint la position
+    //   if (Math.abs(cameraPosition.x - pigou.position.x)<2 && Math.abs(cameraPosition.z - pigou.position.z)<2)
+    //   {
+    //       clearInterval(cameraReached);
+    //   }
+    // }
+
+    // Action du guide 
+
+    // Les transistions
+    // si l'utilisateur est là 
+    isHere()
     {
+        return true;
+    }
+
+    // Si l'utilisateur est perdu 
+    userLost()
+    {
+        // Récupération de la caméra
+        var camera = document.getElementById("camera");
+        var guide = document.getElementById("guide");
+
+        var positionCamera = camera.getAttribute('position');
+        var positionGuide = guide.getAttribute('position');
+
+        // Calcul de la distance dans l'espace
+        var distance = Math.sqrt((positionCamera.x - positionGuide.x)*(positionCamera.x - positionGuide.x) + (positionCamera.y - positionGuide.y)*(positionCamera.y - positionGuide.y) +  (positionCamera.z - positionGuide.z)*(positionCamera.z - positionGuide.z));
+
+        // Valeur arbitraire
+        if(distance > 3.5)
+        {
+            return true;
+        }     
+        return false;        
+    }
+
+    // Si l'utilisateur est bien avec le guide
+    userWithGuide()
+    {
+        return !this.userLost();
+    }
+
+    // Si le pingouin a atteint sa cible  
+    targetReached(targetName)
+    {
+        // On récupère la target à atteindre
+        var target = document.getElementById(targetName);
+        var guide = document.getElementById("guide");
+
+        var positionTarget = target.getAttribute('position');
+        var positionGuide = guide.getAttribute('position');
+
+         // Calcul de la distance dans l'espace
+        var distance = Math.sqrt((positionTarget.x - positionGuide.x)*(positionTarget.x - positionGuide.x) + (positionTarget.y - positionGuide.y)*(positionTarget.y - positionGuide.y) +  (positionTarget.z - positionGuide.z)*(positionTarget.z - positionGuide.z));
+     
+        // Valeur arbitraire
+        if(distance <  3.5)
+        {
+            return true;
+        }     
+        return false;   
 
     }
 
-    MoveToCamera(pigou){
-
-
-      var cameraPosition = pigou.getCameraPosition();
-      var pigouPos = pigou.position;
-
-      if (pigouPos.x > cameraPosition.x + 0.5)
-      {
-          pigouPos.x-=0.1;
-      }
-      else if(pigouPos.x < cameraPosition.x - 0.5)
-      {
-          pigouPos.x += 0.1;
-      }
-      else
-      {
-          pigouPos.x = cameraPosition.x;
-      }
-      // Gestion de la position en Z
-      if (pigouPos.z > cameraPosition.z + 0.5)
-      {
-          pigouPos.z -= 0.1;
-      }
-      else if(pigouPos.z < cameraPosition.z - 0.5)
-      {
-          pigouPos.z += 0.1;
-      }
-      else
-      {
-          pigouPos.z = cameraPosition.z;
-      }
-
-
-      pigou.setPosition(pigouPos.x, pigouPos.y, pigouPos.z);
-
-      // Test pour savoir si la camera a atteint la position
-      if (Math.abs(cameraPosition.x - pigou.position.x)<2 && Math.abs(cameraPosition.z - pigou.position.z)<2)
-      {
-          clearInterval(cameraReached);
-      }
-      /*var a = (this.position.z - cameraPosition.z)/(this.position.x - cameraPosition.x);
-      var b = cameraPosition.z-a*cameraPosition.x;
-      console.log("a: " + a);
-      console.log("b: " + b);
-      console.log("pigou x: " + this.position.x);
-      var moveX = this.position.x+0.5;
-      var moveZ = a*(this.position.x+0.5);
-      console.log("move x: "+ moveX);
-      console.log("move z: " + moveZ);
-      this.setPosition(this.position.x+0.5, this.position.y, a*(this.position.x+0.5));*/
-    }
-
+    // Représente la fin de la visite
+    endVisit()
+    {
+        // On veut arriver à la cheminée      
+        return targetReached("cheminee");
+    }    
 };
