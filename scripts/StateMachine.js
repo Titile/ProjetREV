@@ -1,9 +1,41 @@
+class Automate
+{
+    // Architecture de l'automate qui va servir au pingouin
+    constructor(acteur, currentState)
+    {
+		alert("automate created");
+        this.Acteur = acteur;
+        this.CurrentState = currentState;
+        this.CurrentState.enter();
+        this.PreviousState = null;
+
+    }
+
+    // Ce qui va faire évoluer l'état de l'automate 
+    Execute(Acteur)
+    {
+        this.CurrentState.execute();
+    }
+    // Ce qui va changer l'état de l'automate
+    ChangeState(NewState)
+    {
+        this.PreviousState = this.CurrentState;
+        this.CurrentState.exit();
+        this.CurrentState = NewState;
+        this.CurrentState.enter();
+    }
+
+    RevertToPreviousState()
+    {
+        this.ChangeState(self.PreviousState);
+    }
+}
+
+
 class State 
 {
 	enter()
     {
-        alert("I'm in the Big boss of state");
-
 		console.log("enter function");
 	}
 
@@ -20,20 +52,19 @@ class State
 
 class Waiting extends State 
 {
-	enter(fsm)
+	enter()
     {
         alert("I'm in the waiting state");
         this.interval = setInterval(this.execute,50);
 	}
 
-	execute(fsm)
-    {
-        
-		guide = fsm.Acteur;
+	execute()
+    {     
+		var acteur = fsm.Acteur;
 
-		if (guide.isHere() ){
+		if (acteur.isHere()){
 			alert("Changing state from waiting to seekVisitor");
-			//fsm.ChangeState(seekVisitor);
+			fsm.ChangeState(seekVisitor);
 		}
 
 		else{
@@ -100,3 +131,6 @@ var waiting = new Waiting();
 var speak = new Speak();
 var seekVisitor = new SeekVisitor();
 var lead = new Lead();
+
+var guide = new Guide("guide");
+var fsm = new Automate(guide, waiting);
