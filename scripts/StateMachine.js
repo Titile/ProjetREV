@@ -11,7 +11,7 @@ class Automate
         this.PreviousState = null;
     }
 
-    // Ce qui va faire évoluer l'état de l'automate 
+    // Ce qui va faire évoluer l'état de l'automate
     Execute(Acteur)
     {
         this.CurrentState.execute();
@@ -31,7 +31,7 @@ class Automate
     }
 }
 
-class State 
+class State
 {
 	enter()
     {
@@ -49,7 +49,7 @@ class State
 	}
 }
 
-class Waiting extends State 
+class Waiting extends State
 {
 	enter()
     {
@@ -57,7 +57,7 @@ class Waiting extends State
 	}
 
 	execute()
-    {     
+    {
 		var acteur = fsm.Acteur;
 
 		if (acteur.userIsHere()){
@@ -69,10 +69,10 @@ class Waiting extends State
 	exit(){
 		clearInterval(targetReached);
 		console.log("exit function");
-	}		
+	}
 }
 
-class SeekVisitor extends State 
+class SeekVisitor extends State
 {
 	enter()
 	{
@@ -93,10 +93,10 @@ class SeekVisitor extends State
 	exit(){
 		clearInterval(targetReached);
 		console.log("exit function");
-	}		
+	}
 }
 
-class Speak extends State 
+class Speak extends State
 {
 	enter(){
 		this.execute();
@@ -110,12 +110,15 @@ class Speak extends State
 		}
 	}
 
-	exit()
-	{
-	}		
+	exit(){
+		alert("exit speak");
+
+		console.log("exit function");
+	}
+
 }
 
-class Lead extends State 
+class Lead extends State
 {
 	enter()
 	{
@@ -140,13 +143,13 @@ class Lead extends State
 	}		
 }
 
-// Définition états 
+// Définition états
 var waiting = new Waiting();
 var speak = new Speak();
 var seekVisitor = new SeekVisitor();
 var lead = new Lead();
 
-var guide; 
+var guide;
 var fsm;
 var targetReached;
 
